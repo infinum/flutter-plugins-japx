@@ -1,8 +1,8 @@
 name: japx
-description: A new flutter plugin project.
-version: 0.0.1
-author:
-homepage:
+description: Light  weight  JSON API parser
+version: 1.0.0
+author: Vp
+homepage: https://github.com/infinum/flutter-plugins-japx
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
