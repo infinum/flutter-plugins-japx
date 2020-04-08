@@ -1,0 +1,10 @@
+{
+  "data": {
+    "id": "1",
+    "type": "users",
+    "attributes": {
+      "email": "john@infinum.co",
+      "username": "john"
+    }
+  }
+}
