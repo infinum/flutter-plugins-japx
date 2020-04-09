@@ -1,16 +1,12 @@
-# japx_example
+# Japx example
 
 Demonstrates how to use the japx plugin.
 
-## Getting Started
+## Description
 
-This project is a starting point for a Flutter application.
+In this example API call is mocked. We create a user and send that user to server with JSON:API content-type.
+For creating body, we created a JSON format which consists of `type` and users `email` and `name`.
+Then we parsed that JSON to JSON:API with `Japx` and sent it to the server.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Server response was mocked with a JSON file in assets. Using `Japx` we flattened the response and recreated user
+with sending the `data` part of JSON string to the function `UserFromMap` created by `json_serializable`.

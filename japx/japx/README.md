@@ -343,9 +343,13 @@ Simple project with mocked API can be found in this repository. Clone the reposi
 
 ## Authors
 
-Vlaho Poluta
+Vlaho Poluta, [vlaho.poluta@infinum.com](vlaho.poluta@infinum.com)
 
-Maroje Marcelic
+Maroje Marcelic, [maroje.marcelic@infinum.com](maroje.marcelic@infinum.com)
+
+Maintained by [Infinum](https://infinum.com)
 
 ## License
+
+Japx is available under the MIT license. See the LICENSE file for more info.
 

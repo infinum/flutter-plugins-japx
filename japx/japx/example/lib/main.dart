@@ -78,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
     print(userFromApi.toString());
 
     setState(() {
-      secondString = 'User received from apit ${userFromApi.toString()}';
+      secondString = 'User received from api:\n${userFromApi.toString()}';
     });
   }
 
