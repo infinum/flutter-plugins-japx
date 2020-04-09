@@ -339,9 +339,13 @@ Result:
 
 ## Example project
 
-Simple project with mocked API can be found in this repository. Cclone the repository, set the `main.dart ` as an application starting point and run the project.
+Simple project with mocked API can be found in this repository. Clone the repository, set the `main.dart ` as an application starting point and run the project.
 
 ## Authors
+
+Vlaho Poluta
+
+Maroje Marcelic
 
 ## License
 

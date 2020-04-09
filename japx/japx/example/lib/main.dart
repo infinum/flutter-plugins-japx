@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:japx/japx.dart';
+import 'package:japx_example/user_model.dart';
 
 void main() => runApp(MyApp());
 
@@ -33,51 +34,52 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   String firstString;
   String secondString;
+
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Column(
         children: <Widget>[
           RaisedButton(
-            onPressed: decode,
-            child: Text('Decode'),
+            onPressed: mockAPICall,
+            child: Text('Mock API Call'),
           ),
-          RaisedButton(
-            onPressed: encode,
-            child: Text('Encode'),
-          ),
-          Text('$firstString'),
           const SizedBox(
             height: 100,
           ),
-          Text('$secondString'),
+          secondString == null ? SizedBox.shrink() : Text('$secondString'),
         ],
       ),
     );
   }
 
-  void decode() async {
-    final jsonApi = await parseJsonFromAssets("assets/decoding/decoding-2.json");
-    print(jsonApi);
-    print('---------------');
-    final json = jsonEncode(japxDecode(jsonApi));
-    setState(() {
-      firstString = jsonApi.toString();
-      secondString = json.toString();
-    });
-    print(json.toString());
-  }
+  void mockAPICall() async {
+    final User user = User('maroje.marcelic@infinum.com', 'Maroje Marcelic');
 
-  void encode() async {
-    final json = await parseJsonFromAssets("../assets/encoding/encoding-1.json");
-    print(json);
+    Map<String, dynamic> requestData = <String, dynamic>{
+      'type': 'users',
+    };
+    requestData.addAll(user.toMap());
+    print(requestData.toString());
     print('---------------');
-    final jsonApi = jsonEncode(japxEncode(json));
-    setState(() {
-      firstString = json.toString();
-      secondString = jsonApi.toString();
-    });
+    final Map<String, dynamic> encodedData = japxEncode(requestData);
+    print(encodedData.toString());
+
+    await Future<void>.delayed(Duration(seconds: 2));
+
+    final jsonApi = await parseJsonFromAssets("assets/api-response.json");
     print(jsonApi);
+    print('---------------');
+    final json = japxDecode(jsonApi);
+    print(json.toString());
+
+    final User userFromApi = User.fromMap(json['data']);
+    print('---------------');
+    print(userFromApi.toString());
+
+    setState(() {
+      secondString = 'User received from apit ${userFromApi.toString()}';
+    });
   }
 
   Future<Map<String, dynamic>> parseJsonFromAssets(String assetsPath) async {
