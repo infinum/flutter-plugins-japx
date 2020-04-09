@@ -28,7 +28,9 @@
           "data": {"id": "1", "type": "articles"}
         },
         "categories" : {
-          "data" : {"id": "1", "type": "category"}
+          "data" : [
+
+          ]
         }
       }
     }

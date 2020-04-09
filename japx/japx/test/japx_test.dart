@@ -8,54 +8,18 @@ import 'test_data.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  test('Basic decoding', () async {
-    Map<String, dynamic> sample = await decodingSample1();
-    Map<String, dynamic> result = await resultDecoding1();
-
-    final decodedString = japxDecode(sample);
-    expect(decodedString, result);
-  });
-
-  test('Advanced decoding', () async {
-    Map<String, dynamic> sample = await decodingSample2();
-    Map<String, dynamic> result = await resultDecoding2();
-
-    final decodedString = japxDecode(sample);
-    expect(decodedString, result);
-  });
-
-  test('Additional decoding', () async {
-    Map<String, dynamic> sample = await decodingSample3();
-    Map<String, dynamic> result = await resultDecoding3();
-
-    final decodedString = japxDecode(sample);
-    expect(decodedString, result);
-  });
-
-//  test('List decoding', () async {
-//    Map<String, dynamic> sample = await decodingSample4();
-//    Map<String, dynamic> result = await resultDecoding4();
-//
-//    final decodedString = japxDecode(sample);
-//
-//    expect(decodedString, result);
-//  });
-
-//  test('Error decoding', () async {
-//    Map<String, dynamic> sample = await decodingSample5();
-//    Map<String, dynamic> result = await resultDecoding4();
-//
-//    final decodedString = japxDecode(sample);
-//
-//    expect(decodedString, result);
-//  });
+  test('Basic decoding 1', () async => compare(japxDecode(await decodingSample1()), await resultDecoding1()));
+  test('Basic decoding2', () async => compare(japxDecode(await decodingSample2()), await resultDecoding2()));
+  test('Basic decoding3', () async => compare(japxDecode(await decodingSample3()), await resultDecoding3()));
+  test('Basic decoding4', () async => compare(japxDecode(await decodingSample4()), await resultDecoding4()));
+  test('Basic decoding5', () async => compare(japxDecode(await decodingSample5()), await resultDecoding5()));
+  test('Basic decoding6', () async => compare(japxDecode(await decodingSample6()), await resultDecoding6()));
+  test('Basic decoding7', () async => compare(japxDecode(await decodingSample7()), await resultDecoding7()));
 
   test('Basic encoding', () async => compare(japxEncode(await encodingSample1()), await resultEncoding1()));
   test('Extra params encoding', () async => compare(japxEncode(await encodingSample2()), await resultEncoding2()));
-
   test('Meta encoding', () async => compare(japxEncode(await encodingSample3()), await resultEncoding3()));
   test('Recursive encoding', () async => compare(japxEncode(await encodingSample4()), await resultEncoding4()));
-
   test('Simple encoding', () async => compare(japxEncode(await encodingSample5()), await resultEncoding5()));
 }
 

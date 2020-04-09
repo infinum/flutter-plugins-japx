@@ -1,14 +1,25 @@
-# japx
+# Japx
 
-A new flutter plugin project.
+Lightweight [JSON:API][1] parser that flattens complex [JSON:API][1] structure and turns it into simple JSON and vice versa.
+It works by transferring `Map<String, dynamic>` to `Map<String, dynamic>`, so you can use [json_serializable](https://pub.dev/packages/json_serializable)  or any other object mapping tool that you prefer.
 
-## Getting Started
+## Installation
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+Add `japx: ^1.0.0` to your `pubspec.yml` file.
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+## Decoding
+
+### Basic Examples
+
+### Advanced Examples
+
+## Encoding
+
+### Basic Examples
+
+### Advanced Examples
+
+how to install
+
+## Usage
+

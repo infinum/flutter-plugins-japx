@@ -7,6 +7,8 @@ Future<Map<String, dynamic>> decodingSample2() async => parseJsonFromAssets('ass
 Future<Map<String, dynamic>> decodingSample3() async => parseJsonFromAssets('assets/decoding/decoding-3.json');
 Future<Map<String, dynamic>> decodingSample4() async => parseJsonFromAssets('assets/decoding/decoding-4.json');
 Future<Map<String, dynamic>> decodingSample5() async => parseJsonFromAssets('assets/decoding/decoding-5.json');
+Future<Map<String, dynamic>> decodingSample6() async => parseJsonFromAssets('assets/decoding/decoding-6.json');
+Future<Map<String, dynamic>> decodingSample7() async => parseJsonFromAssets('assets/decoding/decoding-7.json');
 
 Future<Map<String, dynamic>> encodingSample1() async => parseJsonFromAssets('assets/encoding/encoding-1.json');
 Future<Map<String, dynamic>> encodingSample2() async => parseJsonFromAssets('assets/encoding/encoding-2.json');
@@ -24,6 +26,10 @@ Future<Map<String, dynamic>> resultDecoding4() async =>
     parseJsonFromAssets('assets/result/decoding/result-decoding-4.json');
 Future<Map<String, dynamic>> resultDecoding5() async =>
     parseJsonFromAssets('assets/result/decoding/result-decoding-5.json');
+Future<Map<String, dynamic>> resultDecoding6() async =>
+    parseJsonFromAssets('assets/result/decoding/result-decoding-6.json');
+Future<Map<String, dynamic>> resultDecoding7() async =>
+    parseJsonFromAssets('assets/result/decoding/result-decoding-7.json');
 
 Future<Map<String, dynamic>> resultEncoding1() async =>
     parseJsonFromAssets('assets/result/encoding/result-encoding-1.json');
