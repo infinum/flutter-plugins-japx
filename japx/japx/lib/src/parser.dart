@@ -100,6 +100,9 @@ Map<String, dynamic> encodeAttributesAndRelationships(Map<String, dynamic> json)
       relationships[key] = {'data': typeIdPair.toMap()};
       json.remove(key);
     }
+    if (json[key] == null) {
+      continue;
+    }
     attributes[key] = json[key];
     json.remove(key);
   }
@@ -110,6 +113,9 @@ Map<String, dynamic> encodeAttributesAndRelationships(Map<String, dynamic> json)
 
 void resolveAttributes(Map<TypeIdPair, Map<String, dynamic>> objects) {
   for (Map<String, dynamic> object in objects.values) {
+    if (object == null) {
+      continue;
+    }
     final attributes = object['attributes'] as Map<String, dynamic>;
     for (String key in attributes.keys) {
       object[key] = attributes[key];
@@ -120,6 +126,9 @@ void resolveAttributes(Map<TypeIdPair, Map<String, dynamic>> objects) {
 
 void resolveRelationships(Map<TypeIdPair, Map<String, dynamic>> objects) {
   objects.values.forEach((object) {
+    if (object == null) {
+      return;
+    }
     final relationships = object['relationships'] as Map<String, dynamic>;
     object.remove('relationships');
     relationships?.forEach((key, value) {

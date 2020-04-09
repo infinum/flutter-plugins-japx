@@ -1,5 +1,5 @@
 name: japx
-description: Light  weight  JSON API parser
+description: Lightweight JSON API parser
 version: 1.0.0
 author: Vp
 homepage: https://github.com/infinum/flutter-plugins-japx
@@ -34,7 +34,12 @@ flutter:
         pluginClass: JapxPlugin
 
   # To add assets to your plugin package, add an assets section, like this:
-  # assets:
+  assets:
+    - assets/decoding/
+    - assets/encoding/
+    - assets/result/encoding/
+    - assets/result/decoding/
+
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
   #
