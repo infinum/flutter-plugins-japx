@@ -343,9 +343,9 @@ Simple project with mocked API can be found in this repository. Clone the reposi
 
 ## Authors
 
-Vlaho Poluta, [vlaho.poluta@infinum.com](vlaho.poluta@infinum.com)
+Vlaho Poluta, vlaho.poluta@infinum.com
 
-Maroje Marcelic, [maroje.marcelic@infinum.com](maroje.marcelic@infinum.com)
+Maroje Marcelic, maroje.marcelic@infinum.com
 
 Maintained by [Infinum](https://infinum.com)
 

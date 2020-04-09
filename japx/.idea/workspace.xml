@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="25e26f3e-230c-43ea-95a2-2a66173fa5e4" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/japx/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/japx/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/japx/example/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/japx/example/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/japx/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/japx/example/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/japx/test/japx_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/japx/test/japx_test.dart" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -66,15 +64,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/japx/assets/decoding/decoding-7.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="629">
-              <caret line="37" column="1" selection-start-line="37" selection-start-column="1" selection-end-line="37" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/japx/assets/decoding/decoding-6.json">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
@@ -109,8 +98,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/japx/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="747">
-              <caret line="353" column="76" selection-start-line="353" selection-start-column="76" selection-end-line="353" selection-end-column="76" />
+            <state relative-caret-position="196">
+              <caret line="355" lean-forward="true" selection-start-line="355" selection-end-line="355" />
             </state>
           </provider>
         </entry>
@@ -168,6 +157,7 @@
         <option value="$PROJECT_DIR$/japx/test/japx_test.dart" />
         <option value="$PROJECT_DIR$/japx/example/lib/main.dart" />
         <option value="$PROJECT_DIR$/japx/example/README.md" />
+        <option value="$PROJECT_DIR$/japx/LICENSE" />
         <option value="$PROJECT_DIR$/japx/README.md" />
       </list>
     </option>
@@ -336,7 +326,7 @@
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19098713" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19098713" />
       <window_info id="Structure" order="1" side_tool="true" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -347,7 +337,7 @@
       <window_info anchor="bottom" id="Run" order="1" weight="0.486747" />
       <window_info anchor="bottom" id="TODO" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" />
-      <window_info anchor="bottom" id="Terminal" order="4" weight="0.5819277" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="4" visible="true" weight="0.5819277" />
       <window_info anchor="bottom" id="Event Log" order="5" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="6" weight="0.32891566" />
       <window_info anchor="bottom" id="Find" order="7" weight="0.32891566" />
@@ -370,9 +360,6 @@
     <entry file="file://$PROJECT_DIR$/lib/japx.dart" />
     <entry file="file://$PROJECT_DIR$/japx/.packages" />
     <entry file="file://$PROJECT_DIR$/japx/CHANGELOG.md">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/japx/LICENSE">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/japx/pubspec.lock">
@@ -612,10 +599,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/japx/LICENSE">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/japx/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="747">
-          <caret line="353" column="76" selection-start-line="353" selection-start-column="76" selection-end-line="353" selection-end-column="76" />
+        <state relative-caret-position="196">
+          <caret line="355" lean-forward="true" selection-start-line="355" selection-end-line="355" />
         </state>
       </provider>
     </entry>
