@@ -57,20 +57,19 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void decode() async {
-//    final jsonApi = await parseJsonFromAssets("assets/decoding-2.json");
-    final jsonApi = 'aaa';
+    final jsonApi = await parseJsonFromAssets("assets/decoding/decoding-2.json");
     print(jsonApi);
     print('---------------');
-//    final json = jsonEncode(japxDecode(jsonApi));
+    final json = jsonEncode(japxDecode(jsonApi));
     setState(() {
       firstString = jsonApi.toString();
-//      secondString = json.toString();
+      secondString = json.toString();
     });
-//    print(json.toString());
+    print(json.toString());
   }
 
   void encode() async {
-    final json = await parseJsonFromAssets("assets/encoding-1.json");
+    final json = await parseJsonFromAssets("../assets/encoding/encoding-1.json");
     print(json);
     print('---------------');
     final jsonApi = jsonEncode(japxEncode(json));

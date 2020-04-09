@@ -8,9 +8,9 @@ import 'test_data.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  test('Basic decoding 1', () async => compare(japxDecode(await decodingSample1()), await resultDecoding1()));
-  test('Basic decoding2', () async => compare(japxDecode(await decodingSample2()), await resultDecoding2()));
-  test('Basic decoding3', () async => compare(japxDecode(await decodingSample3()), await resultDecoding3()));
+  test('Basic decoding', () async => compare(japxDecode(await decodingSample1()), await resultDecoding1()));
+  test('Relationship decoding', () async => compare(japxDecode(await decodingSample2()), await resultDecoding2()));
+  test('Additional info decoding', () async => compare(japxDecode(await decodingSample3()), await resultDecoding3()));
   test('Basic decoding4', () async => compare(japxDecode(await decodingSample4()), await resultDecoding4()));
   test('Basic decoding5', () async => compare(japxDecode(await decodingSample5()), await resultDecoding5()));
   test('Basic decoding6', () async => compare(japxDecode(await decodingSample6()), await resultDecoding6()));
