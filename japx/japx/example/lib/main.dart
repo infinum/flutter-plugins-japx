@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:japx/example/user_model.dart';
 import 'package:japx/japx.dart';
-import 'package:japx_example/user_model.dart';
 
 void main() => runApp(MyApp());
 
