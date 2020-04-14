@@ -22,7 +22,9 @@ void main() {
       () async =>
           compare(japxDecode(await decodingSample6(), includeList: 'author,comments.author'), await resultDecoding6()));
   test(
-      'Empty relationship decoding', () async => compare(japxDecode(await decodingSample7()), await resultDecoding7()));
+      'Empty relationship decoding',
+      () async => compare(japxDecode(await decodingSample7(), includeList: 'author.categories,author.article.author'),
+          await resultDecoding7()));
 
   test('Basic encoding', () async => compare(japxEncode(await encodingSample1()), await resultEncoding1()));
   test('Extra params encoding', () async => compare(japxEncode(await encodingSample2()), await resultEncoding2()));

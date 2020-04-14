@@ -92,6 +92,7 @@ resolve(Map<String, dynamic> object, Map<TypeIdPair, Map<String, dynamic>> allOb
       return result;
     }
     final relationship = relationshipsReferences[relationshipsKey] as Map<String, dynamic>;
+
     final otherObjectsData = array(relationship, 'data');
 
     final otherObjects =
@@ -101,14 +102,12 @@ resolve(Map<String, dynamic> object, Map<TypeIdPair, Map<String, dynamic>> allOb
           objectCopy, allObjects, (paramsMap[relationshipsKey] ?? Map<String, dynamic>()) as Map<String, dynamic>);
     }).toList();
 
-    if (otherObjects.isEmpty) {
-      return result;
-    }
-
     final isObject = relationship['data'] is List ? false : true;
 
-    if (otherObjects.length == 1 && isObject) {
-      result[relationshipsKey] = otherObjects.first;
+    if (isObject) {
+      if (otherObjects.length == 1) {
+        result[relationshipsKey] = otherObjects.first;
+      }
     } else {
       result[relationshipsKey] = otherObjects;
     }
