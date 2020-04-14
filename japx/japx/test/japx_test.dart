@@ -9,10 +9,18 @@ void main() {
   test('Basic decoding', () async => compare(japxDecode(await decodingSample1()), await resultDecoding1()));
   test('Relationship decoding', () async => compare(japxDecode(await decodingSample2()), await resultDecoding2()));
   test('Additional info decoding', () async => compare(japxDecode(await decodingSample3()), await resultDecoding3()));
-  test('Recursive decoding', () async => compare(japxDecode(await decodingSample4()), await resultDecoding4()));
-  test('Relationship no include decoding',
-      () async => compare(japxDecode(await decodingSample5()), await resultDecoding5()));
-  test('Advanced decoding', () async => compare(japxDecode(await decodingSample6()), await resultDecoding6()));
+  test(
+      'Recursive decoding',
+      () async =>
+          compare(japxDecode(await decodingSample4(), includeList: 'author.article.author'), await resultDecoding4()));
+  test(
+      'Relationship no include decoding',
+      () async =>
+          compare(japxDecode(await decodingSample5(), includeList: 'author.article.author'), await resultDecoding5()));
+  test(
+      'Advanced decoding',
+      () async =>
+          compare(japxDecode(await decodingSample6(), includeList: 'author,comments.author'), await resultDecoding6()));
   test(
       'Empty relationship decoding', () async => compare(japxDecode(await decodingSample7()), await resultDecoding7()));
 

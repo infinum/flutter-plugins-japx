@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 
 class TypeIdPair {
@@ -44,14 +46,14 @@ Map<String, dynamic> japxDecode(Map<String, dynamic> jsonApi, {String includeLis
 Map<String, dynamic> _japxDecodeList(Map<String, dynamic> jsonApi, String includeList) {
   final params = includeList.split(',').map((e) => e.split('.').toList()).toList();
 
-  final paramsMap = Map();
+  final paramsMap = Map<String, dynamic>();
   for (var lineArray in params) {
     var map = paramsMap;
     for (var param in lineArray) {
       if (map[param] != null) {
         map = map[param];
       } else {
-        final newMap = Map();
+        final newMap = Map<String, dynamic>();
         map[param] = newMap;
         map = newMap;
       }
@@ -63,16 +65,16 @@ Map<String, dynamic> _japxDecodeList(Map<String, dynamic> jsonApi, String includ
   final allObjectsArray = dataObjectsArray + includedObjectsArray;
   final allObjects = allObjectsArray.fold(Map<TypeIdPair, Map<String, dynamic>>(), (map, element) {
     map[TypeIdPair.from(element)] = element;
-    return element;
+    return map;
   });
 
   final objects = dataObjectsArray.map((e) => resolve(e, allObjects, paramsMap)).toList();
 
   final isObject = jsonApi['data'] is List ? false : true;
   if (isObject && objects.length == 1) {
-    jsonApi['data'] = objects[objects.first];
+    jsonApi['data'] = objects.first;
   } else {
-    jsonApi['data'] = objects.map((e) => objects[e]).toList();
+    jsonApi['data'] = objects;
   }
   jsonApi.remove('included');
   return jsonApi;
@@ -89,12 +91,19 @@ resolve(Map<String, dynamic> object, Map<TypeIdPair, Map<String, dynamic>> allOb
     if (relationshipsReferences[relationshipsKey] == null) {
       return result;
     }
-    final relationship = object[relationshipsKey] as Map<String, dynamic>;
+    final relationship = relationshipsReferences[relationshipsKey] as Map<String, dynamic>;
     final otherObjectsData = array(relationship, 'data');
 
-    final otherObjects = otherObjectsData.map((e) => TypeIdPair.from(e)).map((e) => allObjects[e]).map((e) {
-      return resolve(e, allObjects, (paramsMap[relationshipsKey] ?? Map<String, dynamic>()) as Map<String, dynamic>);
+    final otherObjects =
+        otherObjectsData.map((e) => TypeIdPair.from(e)).map((e) => allObjects[e]).where((e) => e != null).map((e) {
+      final objectCopy = jsonDecode(jsonEncode(e));
+      return resolve(
+          objectCopy, allObjects, (paramsMap[relationshipsKey] ?? Map<String, dynamic>()) as Map<String, dynamic>);
     }).toList();
+
+    if (otherObjects.isEmpty) {
+      return result;
+    }
 
     final isObject = relationship['data'] is List ? false : true;
 
