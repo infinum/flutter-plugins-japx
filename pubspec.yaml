@@ -1,7 +1,10 @@
 name: japx
 description: Lightweight JSON API parser
 version: 1.0.0
-author: Vlaho Poluta
+authors:
+  - Vlaho Poluta <vlaho.poluta@infinum.com>
+  - Maroje Marcelic <maroje.marcelic@infinum.com>
+
 homepage: https://github.com/infinum/flutter-plugins-japx
 
 environment:
