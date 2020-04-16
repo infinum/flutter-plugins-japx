@@ -68,7 +68,7 @@ Map<String, dynamic> _japxDecodeList(Map<String, dynamic> jsonApi, String includ
     return map;
   });
 
-  final objects = dataObjectsArray.map((e) => resolve(e, allObjects, paramsMap)).toList();
+  final objects = dataObjectsArray.map((e) => _resolve(e, allObjects, paramsMap)).toList();
 
   final isObject = jsonApi['data'] is List ? false : true;
   if (isObject && objects.length == 1) {
@@ -80,7 +80,8 @@ Map<String, dynamic> _japxDecodeList(Map<String, dynamic> jsonApi, String includ
   return jsonApi;
 }
 
-resolve(Map<String, dynamic> object, Map<TypeIdPair, Map<String, dynamic>> allObjects, Map<String, dynamic> paramsMap) {
+_resolve(
+    Map<String, dynamic> object, Map<TypeIdPair, Map<String, dynamic>> allObjects, Map<String, dynamic> paramsMap) {
   final attributes = (object['attributes'] ?? Map<String, dynamic>()) as Map<String, dynamic>;
   attributes['type'] = object['type'];
   attributes['id'] = object['id'];
@@ -98,7 +99,7 @@ resolve(Map<String, dynamic> object, Map<TypeIdPair, Map<String, dynamic>> allOb
     final otherObjects =
         otherObjectsData.map((e) => TypeIdPair.from(e)).map((e) => allObjects[e]).where((e) => e != null).map((e) {
       final objectCopy = jsonDecode(jsonEncode(e));
-      return resolve(
+      return _resolve(
           objectCopy, allObjects, (paramsMap[relationshipsKey] ?? Map<String, dynamic>()) as Map<String, dynamic>);
     }).toList();
 
