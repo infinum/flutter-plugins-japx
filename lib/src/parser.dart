@@ -35,6 +35,7 @@ final String _attributes = 'attributes';
 final String _relationships = 'relationships';
 
 class Japx {
+  /// Function that receives JSON and returns JSON with JSON:API format.
   static Map<String, dynamic> encode(Object json, {Map<String, dynamic> additionalParams}) {
     final params = additionalParams ?? {};
     if (json is List) {
@@ -47,6 +48,8 @@ class Japx {
     return params;
   }
 
+  /// Function that receives JSON with JSON:API format and returns flattened JSON.
+  /// If needed, add include list for decoding.
   static Map<String, dynamic> decode(Map<String, dynamic> jsonApi, {String includeList}) {
     return (includeList != null) ? _japxDecodeList(jsonApi, includeList) : _decode(jsonApi);
   }
