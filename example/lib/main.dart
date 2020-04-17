@@ -61,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
     requestData.addAll(user.toMap());
     print(requestData.toString());
     print('---------------');
-    final Map<String, dynamic> encodedData = japxEncode(requestData);
+    final Map<String, dynamic> encodedData = Japx.encode(requestData);
     print(encodedData.toString());
 
     await Future<void>.delayed(Duration(seconds: 2));
@@ -69,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final jsonApi = await parseJsonFromAssets("assets/api-response.json");
     print(jsonApi);
     print('---------------');
-    final json = japxDecode(jsonApi);
+    final json = Japx.decode(jsonApi);
     print(json.toString());
 
     final User userFromApi = User.fromMap(json['data']);
