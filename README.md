@@ -9,9 +9,10 @@ Add `japx: ^1.0.0` to your `pubspec.yml` file.
 
 ## Usage
 
-For decoding the API responses use function `japxDecode(Map<String, dynamic> jsonApi)` which returns flattened JSON. 
+For decoding the API responses use function `Japx.decode(Map<String, dynamic> jsonApi, {String includeList})` which returns flattened JSON. 
+Include list is an optional parameter and it is used for deserializing JSON:API relationships.
 
-For encoding use function `japxEncode(Object json, {Map<String, dynamic> additionalParams})` which will return a JSON with JSON:API format.
+For encoding use function `Japx.encode(Object json, {Map<String, dynamic> additionalParams})` which will return a JSON with JSON:API format.
 
 ## Decoding
 
@@ -324,7 +325,6 @@ Result:
           {
             "id": "24",
             "type": "time_off_policy"
-
           },
           {
             "id": "25",
@@ -339,7 +339,7 @@ Result:
 
 ## Example project
 
-Simple project with mocked API can be found in this repository. Clone the repository, set the `main.dart ` as an application starting point and run the project.
+Simple project with mocked API can be found in this repository. Clone the repository, set the `main.dart` as an application starting point and run the project.
 
 ## Authors
 

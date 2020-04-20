@@ -80,8 +80,8 @@ class Japx {
       }
     }
 
-    final dataObjectsArray = _array(jsonApi, 'data');
-    final includedObjectsArray = _array(jsonApi, 'included');
+    final dataObjectsArray = _array(jsonApi, _data);
+    final includedObjectsArray = _array(jsonApi, _included);
     final allObjectsArray = dataObjectsArray + includedObjectsArray;
     final allObjects = allObjectsArray.fold(Map<_TypeIdPair, Map<String, dynamic>>(), (map, element) {
       map[_TypeIdPair.from(element)] = element;
@@ -90,23 +90,23 @@ class Japx {
 
     final objects = dataObjectsArray.map((e) => _resolve(e, allObjects, paramsMap)).toList();
 
-    final isObject = jsonApi['data'] is List ? false : true;
+    final isObject = jsonApi[_data] is List ? false : true;
     if (isObject && objects.length == 1) {
-      jsonApi['data'] = objects.first;
+      jsonApi[_data] = objects.first;
     } else {
-      jsonApi['data'] = objects;
+      jsonApi[_data] = objects;
     }
-    jsonApi.remove('included');
+    jsonApi.remove(_included);
     return jsonApi;
   }
 
   static _resolve(
       Map<String, dynamic> object, Map<_TypeIdPair, Map<String, dynamic>> allObjects, Map<String, dynamic> paramsMap) {
-    final attributes = (object['attributes'] ?? Map<String, dynamic>()) as Map<String, dynamic>;
-    attributes['type'] = object['type'];
-    attributes['id'] = object['id'];
+    final attributes = (object[_attributes] ?? Map<String, dynamic>()) as Map<String, dynamic>;
+    attributes[_type] = object[_type];
+    attributes[_id] = object[_id];
 
-    final relationshipsReferences = (object['relationships'] ?? Map<String, dynamic>()) as Map<String, dynamic>;
+    final relationshipsReferences = (object[_relationships] ?? Map<String, dynamic>()) as Map<String, dynamic>;
 
     final relationships = paramsMap.keys.fold(Map<String, dynamic>(), (result, relationshipsKey) {
       if (relationshipsReferences[relationshipsKey] == null) {
@@ -114,7 +114,7 @@ class Japx {
       }
       final relationship = relationshipsReferences[relationshipsKey] as Map<String, dynamic>;
 
-      final otherObjectsData = _array(relationship, 'data');
+      final otherObjectsData = _array(relationship, _data);
 
       final otherObjects =
           otherObjectsData.map((e) => _TypeIdPair.from(e)).map((e) => allObjects[e]).where((e) => e != null).map((e) {
@@ -123,7 +123,7 @@ class Japx {
             objectCopy, allObjects, (paramsMap[relationshipsKey] ?? Map<String, dynamic>()) as Map<String, dynamic>);
       }).toList();
 
-      final isObject = relationship['data'] is List ? false : true;
+      final isObject = relationship[_data] is List ? false : true;
 
       if (isObject) {
         if (otherObjects.length == 1) {
