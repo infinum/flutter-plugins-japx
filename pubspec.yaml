@@ -18,11 +18,3 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-flutter:
-
-  assets:
-    - assets/decoding/
-    - assets/encoding/
-    - assets/result/encoding/
-    - assets/result/decoding/
