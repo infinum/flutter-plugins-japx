@@ -1,0 +1,7 @@
+{
+  "type": "articles",
+  "email": "user@example.com",
+  "password": "password",
+  "push_token": "x",
+  "uuid": "123"
+}
