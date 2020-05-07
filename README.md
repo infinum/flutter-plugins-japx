@@ -341,6 +341,18 @@ Result:
 
 Simple project with mocked API can be found in this repository. Clone the repository, set the `main.dart` as an application starting point and run the project.
 
+### Usage with JsonSerializable
+
+This package can be implemented as a simple layer into your exisiting stack. For example, if you use JsonSerializable, you can do it like this:
+
+```dart
+@JsonSerializable(nullable: false)
+class Article {
+
+  factory Article.fromJson(Map<String, dynamic> json) => _$ArticleFromJson(Japx.decode(json));
+  Map<String, dynamic> toJson() => Japx.encode(_$ArticleToJson(this));
+```
+
 ## Authors
 
 Vlaho Poluta, vlaho.poluta@infinum.com
