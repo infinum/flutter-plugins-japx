@@ -1,7 +1,8 @@
 name: japx
-description: Lightweight JSON API parser
+description: Lightweight parser for the JSON:API (http://jsonapi.org/) structure.
 version: 1.0.0
 repository: https://github.com/infinum/flutter-plugins-japx
+homepage: https://github.com/infinum/flutter-plugins-japx
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
