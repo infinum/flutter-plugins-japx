@@ -19,7 +19,8 @@ class _TypeIdPair {
   int get hashCode => type.hashCode ^ id.hashCode;
 
   @override
-  bool operator ==(other) => other is _TypeIdPair && type == other.type && id == other.id;
+  bool operator ==(other) =>
+      other is _TypeIdPair && type == other.type && id == other.id;
 
   @override
   String toString() => '[$type: $id]';
@@ -41,10 +42,14 @@ class Japx {
   /// - parameter additionalParams:  Additional Map<String: dynamic> to add with `data` to JSON:API object.
   ///
   /// - returns: JSON:API object.
-  static Map<String, dynamic> encode(Object json, {Map<String, dynamic> additionalParams}) {
+  static Map<String, dynamic> encode(Object json,
+      {Map<String, dynamic> additionalParams}) {
     final params = additionalParams ?? {};
     if (json is List) {
-      final list = json.map((e) => e as Map<String, dynamic>).map((e) => _encodeAttributesAndRelationships(e)).toList();
+      final list = json
+          .map((e) => e as Map<String, dynamic>)
+          .map((e) => _encodeAttributesAndRelationships(e))
+          .toList();
       params[_data] = list;
     }
     if (json is Map<String, dynamic>) {
@@ -59,12 +64,17 @@ class Japx {
   /// - parameter includeList:       The include list for deserializing JSON:API relationships.
   ///
   /// - returns: JSON object.
-  static Map<String, dynamic> decode(Map<String, dynamic> jsonApi, {String includeList}) {
-    return (includeList != null) ? _japxDecodeList(jsonApi, includeList) : _decode(jsonApi);
+  static Map<String, dynamic> decode(Map<String, dynamic> jsonApi,
+      {String includeList}) {
+    return (includeList != null)
+        ? _japxDecodeList(jsonApi, includeList)
+        : _decode(jsonApi);
   }
 
-  static Map<String, dynamic> _japxDecodeList(Map<String, dynamic> jsonApi, String includeList) {
-    final params = includeList.split(',').map((e) => e.split('.').toList()).toList();
+  static Map<String, dynamic> _japxDecodeList(
+      Map<String, dynamic> jsonApi, String includeList) {
+    final params =
+        includeList.split(',').map((e) => e.split('.').toList()).toList();
 
     final paramsMap = Map<String, dynamic>();
     for (var lineArray in params) {
@@ -83,12 +93,15 @@ class Japx {
     final dataObjectsArray = _array(jsonApi, _data);
     final includedObjectsArray = _array(jsonApi, _included);
     final allObjectsArray = dataObjectsArray + includedObjectsArray;
-    final allObjects = allObjectsArray.fold(Map<_TypeIdPair, Map<String, dynamic>>(), (map, element) {
+    final allObjects = allObjectsArray
+        .fold(Map<_TypeIdPair, Map<String, dynamic>>(), (map, element) {
       map[_TypeIdPair.from(element)] = element;
       return map;
     });
 
-    final objects = dataObjectsArray.map((e) => _resolve(e, allObjects, paramsMap)).toList();
+    final objects = dataObjectsArray
+        .map((e) => _resolve(e, allObjects, paramsMap))
+        .toList();
 
     final isObject = jsonApi[_data] is List ? false : true;
     if (isObject && objects.length == 1) {
@@ -101,26 +114,38 @@ class Japx {
   }
 
   static _resolve(
-      Map<String, dynamic> object, Map<_TypeIdPair, Map<String, dynamic>> allObjects, Map<String, dynamic> paramsMap) {
-    final attributes = (object[_attributes] ?? Map<String, dynamic>()) as Map<String, dynamic>;
+      Map<String, dynamic> object,
+      Map<_TypeIdPair, Map<String, dynamic>> allObjects,
+      Map<String, dynamic> paramsMap) {
+    final attributes =
+        (object[_attributes] ?? Map<String, dynamic>()) as Map<String, dynamic>;
     attributes[_type] = object[_type];
     attributes[_id] = object[_id];
 
-    final relationshipsReferences = (object[_relationships] ?? Map<String, dynamic>()) as Map<String, dynamic>;
+    final relationshipsReferences = (object[_relationships] ??
+        Map<String, dynamic>()) as Map<String, dynamic>;
 
-    final relationships = paramsMap.keys.fold(Map<String, dynamic>(), (result, relationshipsKey) {
+    final relationships =
+        paramsMap.keys.fold(Map<String, dynamic>(), (result, relationshipsKey) {
       if (relationshipsReferences[relationshipsKey] == null) {
         return result;
       }
-      final relationship = relationshipsReferences[relationshipsKey] as Map<String, dynamic>;
+      final relationship =
+          relationshipsReferences[relationshipsKey] as Map<String, dynamic>;
 
       final otherObjectsData = _array(relationship, _data);
 
-      final otherObjects =
-          otherObjectsData.map((e) => _TypeIdPair.from(e)).map((e) => allObjects[e]).where((e) => e != null).map((e) {
+      final otherObjects = otherObjectsData
+          .map((e) => _TypeIdPair.from(e))
+          .map((e) => allObjects[e])
+          .where((e) => e != null)
+          .map((e) {
         final objectCopy = jsonDecode(jsonEncode(e));
         return _resolve(
-            objectCopy, allObjects, (paramsMap[relationshipsKey] ?? Map<String, dynamic>()) as Map<String, dynamic>);
+            objectCopy,
+            allObjects,
+            (paramsMap[relationshipsKey] ?? Map<String, dynamic>())
+                as Map<String, dynamic>);
       }).toList();
 
       final isObject = relationship[_data] is List ? false : true;
@@ -171,7 +196,8 @@ class Japx {
     return jsonApi;
   }
 
-  static Map<String, dynamic> _encodeAttributesAndRelationships(Map<String, dynamic> json) {
+  static Map<String, dynamic> _encodeAttributesAndRelationships(
+      Map<String, dynamic> json) {
     final attributes = Map<String, dynamic>();
     final relationships = Map<String, dynamic>();
     final keys = json.keys.toList();
@@ -181,14 +207,18 @@ class Japx {
         continue;
       }
       if (json[key] is List) {
-        final array = (json[key] as List).map((e) => e as Map<String, dynamic>).toList();
+        final array =
+            (json[key] as List).map((e) => e as Map<String, dynamic>).toList();
         final isArrayOfRelationships = _TypeIdPair.from(array.first) != null;
         if (!isArrayOfRelationships) {
           attributes[key] = array;
           json.remove(key);
           continue;
         }
-        final dataArray = array.map((e) => _TypeIdPair.from(e)).map((e) => e.toMap()).toList();
+        final dataArray = array
+            .map((e) => _TypeIdPair.from(e))
+            .map((e) => e.toMap())
+            .toList();
         relationships[key] = {_data: dataArray};
         json.remove(key);
       }
@@ -214,7 +244,8 @@ class Japx {
     return json;
   }
 
-  static void _resolveAttributes(Map<_TypeIdPair, Map<String, dynamic>> objects) {
+  static void _resolveAttributes(
+      Map<_TypeIdPair, Map<String, dynamic>> objects) {
     for (Map<String, dynamic> object in objects.values) {
       if (object == null) {
         continue;
@@ -227,7 +258,8 @@ class Japx {
     }
   }
 
-  static void _resolveRelationships(Map<_TypeIdPair, Map<String, dynamic>> objects) {
+  static void _resolveRelationships(
+      Map<_TypeIdPair, Map<String, dynamic>> objects) {
     objects.values.forEach((object) {
       if (object == null) {
         return;
@@ -243,7 +275,10 @@ class Japx {
         final others = _array(relationshipParams, _data);
 
         // Fetch those object from `objects`
-        final othersObjects = others.map((e) => _TypeIdPair.from(e)).map((e) => objects[e]).toList();
+        final othersObjects = others
+            .map((e) => _TypeIdPair.from(e))
+            .map((e) => objects[e])
+            .toList();
 
         final isObject = relationshipParams[_data] is List ? false : true;
 
@@ -256,7 +291,8 @@ class Japx {
     });
   }
 
-  static List<Map<String, dynamic>> _array(Map<String, dynamic> json, String key) {
+  static List<Map<String, dynamic>> _array(
+      Map<String, dynamic> json, String key) {
     if (json[key] is List) {
       final list = json[key] as List;
       return list.map((e) => e as Map<String, dynamic>).toList();
