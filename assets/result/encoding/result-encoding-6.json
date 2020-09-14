@@ -1,0 +1,14 @@
+{
+  "data": {
+    "type": "symptoms",
+    "attributes": {
+      "symptoms": [
+        "First Symptom",
+        "Second Symptom",
+        "Third Symptom",
+        "Forth Symptom"
+      ]
+    },
+    "relationships": {}
+  }
+}

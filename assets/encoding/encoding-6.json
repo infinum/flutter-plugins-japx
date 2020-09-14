@@ -1,0 +1,9 @@
+{
+  "type": "symptoms",
+  "symptoms": [
+    "First Symptom",
+    "Second Symptom",
+    "Third Symptom",
+    "Forth Symptom"
+  ]
+}
