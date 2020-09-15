@@ -1,15 +1,11 @@
 # Flutter Japx - JSON:API Decoder/Encoder
 
 <p align="center">
-    <img src="japx-logo-new.png" width="300" max-width="50%" alt="Japx"/>
+    <img src="https://raw.githubusercontent.com/infinum/flutter-plugins-japx/master/japx-logo-new.png" width="300" max-width="50%" alt="Japx"/>
 </p>
 
 Lightweight [JSON:API][1] parser that flattens complex [JSON:API][1] structure and turns it into simple JSON and vice versa.
 It works by transferring `Map<String, dynamic>` to `Map<String, dynamic>`, so you can use [json_serializable](https://pub.dev/packages/json_serializable)  or any other object mapping tool that you prefer.
-
-## Installation
-
-Add `japx: ^1.0.0` to your `pubspec.yml` file.
 
 ## Usage
 
