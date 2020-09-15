@@ -11,3 +11,9 @@
 
 * Fixed an issue when encoding a list.
 * Added a test for encoding a list.
+
+## 1.0.3
+
+* Updated image.
+* Fixed formatting.
+* Removed installation from README.
