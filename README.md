@@ -9,7 +9,7 @@ It works by transferring `Map<String, dynamic>` to `Map<String, dynamic>`, so yo
 
 ## Installation
 
-Add `japx: ^1.0.0` to your `pubspec.yml` file.
+Add `japx: ^1.0.2` to your `pubspec.yml` file.
 
 ## Usage
 
