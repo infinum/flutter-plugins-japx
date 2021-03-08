@@ -32,7 +32,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String secondString;
+  String? secondString;
 
   @override
   Widget build(BuildContext context) {
