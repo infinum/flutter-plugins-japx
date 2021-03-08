@@ -86,8 +86,8 @@ class Japx {
       }
     }
 
-    final dataObjectsArray = _array(jsonApi, _data);
-    final includedObjectsArray = _array(jsonApi, _included);
+    final dataObjectsArray = _arrayOrThrow(jsonApi, _data);
+    final includedObjectsArray = _array(jsonApi, _included) ?? [];
     final allObjectsArray = dataObjectsArray + includedObjectsArray;
     final allObjects = allObjectsArray.fold(Map<_TypeIdPair, Map<String, dynamic>>(), (dynamic map, element) {
       map[_TypeIdPair.from(element)] = element;
@@ -120,7 +120,7 @@ class Japx {
       }
       final relationship = relationshipsReferences[relationshipsKey] as Map<String, dynamic>;
 
-      final otherObjectsData = _array(relationship, _data);
+      final otherObjectsData = _arrayOrThrow(relationship, _data);
 
       final otherObjects = otherObjectsData
           .map((e) => _TypeIdPair.fromOrThrow(e))
@@ -150,8 +150,8 @@ class Japx {
   }
 
   static Map<String, dynamic> _decode(Map<String, dynamic> jsonApi) {
-    final dataObjectsArray = _array(jsonApi, _data);
-    final includedObjectsArray = _array(jsonApi, _included);
+    final dataObjectsArray = _arrayOrThrow(jsonApi, _data);
+    final includedObjectsArray = _array(jsonApi, _included) ?? [];
 
     final dataObjects = <_TypeIdPair>[];
     final objects = Map<_TypeIdPair, Map<String, dynamic>>();
@@ -249,7 +249,7 @@ class Japx {
         }
         final relationshipParams = value;
 
-        final others = _array(relationshipParams, _data);
+        final others = _arrayOrThrow(relationshipParams, _data);
 
         // Fetch those object from `objects`
         final othersObjects = others.map((e) => _TypeIdPair.fromOrThrow(e)).map((e) => objects[e]).toList();
@@ -265,12 +265,24 @@ class Japx {
     });
   }
 
-  static List<Map<String, dynamic>> _array(Map<String, dynamic> json, String key) {
-    if (json[key] is List) {
+  static List<Map<String, dynamic>>? _array(Map<String, dynamic> json, String key) {
+    dynamic value = json[key];
+    if (value == null) {
+      return null;
+    }
+    if (value is List) {
       final list = json[key] as List;
       return list.map((e) => e as Map<String, dynamic>).toList();
     } else {
-      return [json[key] as Map<String, dynamic>];
+      return [value as Map<String, dynamic>];
     }
+  }
+
+  static List<Map<String, dynamic>> _arrayOrThrow(Map<String, dynamic> json, String key) {
+    final array = _array(json, key);
+    if (array == null) {
+      throw 'Unable to find array for key: $key from: $json';
+    }
+    return array;
   }
 }
