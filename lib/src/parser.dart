@@ -3,12 +3,12 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 
 class _TypeIdPair {
-  _TypeIdPair({@required this.type, @required this.id});
+  _TypeIdPair({required this.type, required this.id});
 
   final String type;
   final String id;
 
-  static _TypeIdPair from(Map<String, dynamic> json) {
+  static _TypeIdPair? from(Map<String, dynamic> json) {
     if (json == null || json[_type] == null || json[_id] == null) {
       return null;
     }
@@ -43,7 +43,7 @@ class Japx {
   ///
   /// - returns: JSON:API object.
   static Map<String, dynamic> encode(Object json,
-      {Map<String, dynamic> additionalParams}) {
+      {Map<String, dynamic>? additionalParams}) {
     final params = additionalParams ?? {};
     if (json is List) {
       final list = json
@@ -65,7 +65,7 @@ class Japx {
   ///
   /// - returns: JSON object.
   static Map<String, dynamic> decode(Map<String, dynamic> jsonApi,
-      {String includeList}) {
+      {String? includeList}) {
     return (includeList != null)
         ? _japxDecodeList(jsonApi, includeList)
         : _decode(jsonApi);
@@ -94,8 +94,11 @@ class Japx {
     final includedObjectsArray = _array(jsonApi, _included);
     final allObjectsArray = dataObjectsArray + includedObjectsArray;
     final allObjects = allObjectsArray
-        .fold(Map<_TypeIdPair, Map<String, dynamic>>(), (map, element) {
-      map[_TypeIdPair.from(element)] = element;
+        .fold(Map<_TypeIdPair, Map<String, dynamic>>(),
+            (Map<_TypeIdPair, Map<String, dynamic>> map, element) {
+      if (_TypeIdPair.from(element) != null && map != null) {
+        map[_TypeIdPair.from(element)!] = element;
+      }
       return map;
     });
 
@@ -125,8 +128,8 @@ class Japx {
     final relationshipsReferences = (object[_relationships] ??
         Map<String, dynamic>()) as Map<String, dynamic>;
 
-    final relationships =
-        paramsMap.keys.fold(Map<String, dynamic>(), (result, relationshipsKey) {
+    final relationships = paramsMap.keys.fold(Map<String, dynamic>(),
+        (Map<String, dynamic> result, relationshipsKey) {
       if (relationshipsReferences[relationshipsKey] == null) {
         return result;
       }
@@ -169,18 +172,24 @@ class Japx {
     final dataObjectsArray = _array(jsonApi, _data);
     final includedObjectsArray = _array(jsonApi, _included);
 
-    final dataObjects = List<_TypeIdPair>();
+    final dataObjects = <_TypeIdPair>[];
     final objects = Map<_TypeIdPair, Map<String, dynamic>>();
 
     for (Map<String, dynamic> map in dataObjectsArray) {
       final typeId = _TypeIdPair.from(map);
-      dataObjects.add(typeId);
-      objects[typeId] = map;
+
+      if (typeId != null) {
+        dataObjects.add(typeId);
+        objects[typeId] = map;
+      }
     }
 
     for (Map<String, dynamic> map in includedObjectsArray) {
       final typeId = _TypeIdPair.from(map);
-      objects[typeId] = map;
+
+      if (typeId != null) {
+        objects[typeId] = map;
+      }
     }
 
     _resolveAttributes(objects);
@@ -217,7 +226,7 @@ class Japx {
         }
         final dataArray = array
             .map((e) => _TypeIdPair.from(e))
-            .map((e) => e.toMap())
+            .map((e) => e?.toMap())
             .toList();
         relationships[key] = {_data: dataArray};
         json.remove(key);
@@ -264,9 +273,14 @@ class Japx {
       if (object == null) {
         return;
       }
+
+      if (object[_relationships] == null) {
+        return;
+      }
+
       final relationships = object[_relationships] as Map<String, dynamic>;
       object.remove(_relationships);
-      relationships?.forEach((key, value) {
+      relationships.forEach((key, value) {
         if (!(value is Map<String, dynamic>)) {
           throw 'Relationship not found';
         }
@@ -297,6 +311,9 @@ class Japx {
       final list = json[key] as List;
       return list.map((e) => e as Map<String, dynamic>).toList();
     } else {
+      if (json[key] == null) {
+        return [{}];
+      }
       return [json[key] as Map<String, dynamic>];
     }
   }
