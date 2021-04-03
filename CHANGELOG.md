@@ -17,3 +17,11 @@
 * Updated image.
 * Fixed formatting.
 * Removed installation from README.
+
+## 2.0.0
+
+* Added null safety
+
+## 2.0.1
+
+* Internal bugfixes
