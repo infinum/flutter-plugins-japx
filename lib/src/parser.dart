@@ -249,7 +249,11 @@ class Japx {
         }
         final relationshipParams = value;
 
-        final others = _arrayOrThrow(relationshipParams, _data);
+        final others = _array(relationshipParams, _data);
+        if (others == null) {
+          object[key] = null;
+          return;
+        }
 
         // Fetch those object from `objects`
         final othersObjects = others.map((e) => _TypeIdPair.fromOrThrow(e)).map((e) => objects[e]).toList();
