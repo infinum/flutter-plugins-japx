@@ -25,3 +25,7 @@
 ## 2.0.1
 
 * Internal bugfixes
+
+## 2.0.2
+
+* Internal bugfixes
