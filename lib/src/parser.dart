@@ -120,7 +120,10 @@ class Japx {
       }
       final relationship = relationshipsReferences[relationshipsKey] as Map<String, dynamic>;
 
-      final otherObjectsData = _arrayOrThrow(relationship, _data);
+      final otherObjectsData = _array(relationship, _data);
+      if (otherObjectsData == null) {
+        return result;
+      }
 
       final otherObjects = otherObjectsData
           .map((e) => _TypeIdPair.fromOrThrow(e))
