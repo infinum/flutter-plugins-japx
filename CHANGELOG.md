@@ -29,3 +29,7 @@
 ## 2.0.2
 
 * Internal bugfixes
+
+## 2.0.3
+
+* Internal bugfixes - Tnx to MRSEREY for contribution :)
