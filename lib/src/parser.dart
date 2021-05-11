@@ -231,11 +231,13 @@ class Japx {
       if (object == null) {
         continue;
       }
-      final attributes = object[_attributes] as Map<String, dynamic>;
-      for (String key in attributes.keys) {
-        object[key] = attributes[key];
+      if (object[_attributes] != null) {
+        final attributes = object[_attributes] as Map<String, dynamic>;
+        for (String key in attributes.keys) {
+          object[key] = attributes[key];
+        }
+        object.remove(_attributes);
       }
-      object.remove(_attributes);
     }
   }
 
