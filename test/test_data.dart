@@ -16,6 +16,8 @@ Future<Map<String, dynamic>> decodingSample6() async =>
     parseJsonFromAssets('packages/japx/assets/decoding/decoding-6.json');
 Future<Map<String, dynamic>> decodingSample7() async =>
     parseJsonFromAssets('packages/japx/assets/decoding/decoding-7.json');
+Future<Map<String, dynamic>> decodingSample8() async =>
+    parseJsonFromAssets('packages/japx/assets/decoding/decoding-8.json');
 
 Future<Map<String, dynamic>> encodingSample1() async =>
     parseJsonFromAssets('packages/japx/assets/encoding/encoding-1.json');
@@ -44,6 +46,8 @@ Future<Map<String, dynamic>> resultDecoding6() async =>
     parseJsonFromAssets('packages/japx/assets/result/decoding/result-decoding-6.json');
 Future<Map<String, dynamic>> resultDecoding7() async =>
     parseJsonFromAssets('packages/japx/assets/result/decoding/result-decoding-7.json');
+Future<Map<String, dynamic>> resultDecoding8() async =>
+    parseJsonFromAssets('packages/japx/assets/result/decoding/result-decoding-8.json');
 
 Future<Map<String, dynamic>> resultEncoding1() async =>
     parseJsonFromAssets('packages/japx/assets/result/encoding/result-encoding-1.json');
