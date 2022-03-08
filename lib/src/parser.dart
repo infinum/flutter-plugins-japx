@@ -234,7 +234,9 @@ class Japx {
       if (object[_attributes] != null) {
         final attributes = object[_attributes] as Map<String, dynamic>;
         for (String key in attributes.keys) {
-          object[key] = attributes[key];
+          if(attributes[key] != null) {
+            object[key] = attributes[key];
+          }
         }
         object.remove(_attributes);
       }
@@ -256,7 +258,9 @@ class Japx {
 
         final others = _array(relationshipParams, _data);
         if (others == null) {
-          object[key] = null;
+          if(object[key] != null) {
+            object[key] = null;
+          }
           return;
         }
 
@@ -266,9 +270,13 @@ class Japx {
         final isObject = relationshipParams[_data] is List ? false : true;
 
         if (others.length == 1 && isObject) {
-          object[key] = othersObjects.first;
+          if(othersObjects.first != null) {
+            object[key] = othersObjects.first;
+          }
         } else {
-          object[key] = othersObjects;
+          if(othersObjects != null) {
+            object[key] = othersObjects;
+          }
         }
       });
     });
