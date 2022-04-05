@@ -8,7 +8,7 @@ part 'user_model.g.dart';
 /// flutter pub run build_runner build
 ///
 /// to rebuild generated files needed for parsing to and from json
-@JsonSerializable(nullable: false)
+@JsonSerializable()
 class User {
   User(this.email, this.name);
   factory User.fromMap(Map<String, dynamic> json) => _$UserFromJson(json);
