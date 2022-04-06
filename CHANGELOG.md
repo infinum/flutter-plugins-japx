@@ -33,3 +33,7 @@
 ## 2.0.3
 
 * Internal bugfixes - Tnx to MRSEREY for contribution :)
+
+## 2.0.4
+
+* Remove Flutter dependency
