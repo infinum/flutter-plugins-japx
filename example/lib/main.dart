@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -5,9 +7,11 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:japx/japx.dart';
 import 'package:japx_example/user_model.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -17,9 +21,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
-        body: HomeScreen(),
+        body: const HomeScreen(),
         appBar: AppBar(
-          title: Text('Japx'),
+          title: const Text('Japx'),
         ),
       ),
     );
@@ -27,8 +31,10 @@ class MyApp extends StatelessWidget {
 }
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  State createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -41,12 +47,14 @@ class _HomeScreenState extends State<HomeScreen> {
         children: <Widget>[
           ElevatedButton(
             onPressed: mockAPICall,
-            child: Text('Mock API Call'),
+            child: const Text('Mock API Call'),
           ),
           const SizedBox(
             height: 100,
           ),
-          secondString == null ? SizedBox.shrink() : Text('$secondString'),
+          secondString == null
+              ? const SizedBox.shrink()
+              : Text('$secondString'),
         ],
       ),
     );
@@ -64,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final Map<String, dynamic> encodedData = Japx.encode(requestData);
     print(encodedData.toString());
 
-    await Future<void>.delayed(Duration(seconds: 2));
+    await Future<void>.delayed(const Duration(seconds: 2));
 
     final jsonApi = await parseJsonFromAssets("assets/api-response.json");
     print(jsonApi);
