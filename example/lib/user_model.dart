@@ -11,7 +11,9 @@ part 'user_model.g.dart';
 @JsonSerializable()
 class User {
   User(this.email, this.name);
+
   factory User.fromMap(Map<String, dynamic> json) => _$UserFromJson(json);
+
   Map<String, dynamic> toMap() => _$UserToJson(this);
 
   final String email;
