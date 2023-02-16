@@ -1,11 +1,9 @@
-import 'package:flutter_test/flutter_test.dart';
+import 'package:japx/src/parser.dart';
+import 'package:test/test.dart';
 
-import '../lib/src/parser.dart';
 import 'test_data.dart';
 
 void main() {
-  TestWidgetsFlutterBinding.ensureInitialized();
-
   test(
       'Basic decoding',
       () async => compare(
@@ -38,10 +36,16 @@ void main() {
           await resultDecoding6()));
   test(
       'Empty relationship decoding',
-      () async => compare(
+          () async => compare(
           Japx.decode(await decodingSample7(),
               includeList: 'author.categories,author.article.author'),
           await resultDecoding7()));
+  test('Nested relationship not included decoding', () async {
+    var decoded = Japx.decode(await decodingSample8());
+    var expected = await resultDecoding8();
+    expect(decoded['data']['author']['categories'], isNotEmpty);
+    expect(expected['data']['author']['categories'], isNotEmpty);
+  });
 
   test(
       'Basic encoding',
