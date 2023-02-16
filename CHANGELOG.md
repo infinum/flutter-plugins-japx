@@ -1,3 +1,8 @@
+## 2.1.0
+
+- Allowing nullable fields to be in response
+- Fix for array relationships in included
+
 ## 2.0.5
 
 - Add linting rules from `lints` package

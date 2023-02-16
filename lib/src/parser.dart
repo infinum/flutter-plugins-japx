@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:collection/collection.dart';
 
 class _TypeIdPair {
   _TypeIdPair({required this.type, required this.id});
@@ -273,7 +274,6 @@ class Japx {
 
   static void _resolveRelationships(
       Map<_TypeIdPair, Map<String, dynamic>?> objects) {
-    Map<_TypeIdPair, Map<String, dynamic>?> objectsAux = {};
     // ignore: avoid_function_literals_in_foreach_calls
     objects.values.forEach((object) {
       if (object == null) {
@@ -309,11 +309,11 @@ class Japx {
         final isObject = relationshipParams[_data] is List ? false : true;
 
         if (others.length == 1 && isObject) {
-          if (othersObjects.first != null) {
+          if (othersObjects.firstOrNull != null) {
             object[key] = othersObjects.first;
           }
         } else {
-          if (othersObjects != null) {
+          if (othersObjects.firstOrNull != null) {
             object[key] = othersObjects;
           }
         }
