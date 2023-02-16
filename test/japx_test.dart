@@ -1,11 +1,9 @@
-import 'package:flutter_test/flutter_test.dart';
+import 'package:japx/src/parser.dart';
+import 'package:test/test.dart';
 
-import '../lib/src/parser.dart';
 import 'test_data.dart';
 
 void main() {
-  TestWidgetsFlutterBinding.ensureInitialized();
-
   test(
       'Basic decoding',
       () async => compare(
