@@ -269,7 +269,8 @@ class Japx {
     }
   }
 
-  static void _resolveRelationships(Map<_TypeIdPair, Map<String, dynamic>?> objects) {
+  static void _resolveRelationships(
+      Map<_TypeIdPair, Map<String, dynamic>?> objects) {
     Map<_TypeIdPair, Map<String, dynamic>?> objectsAux = {};
     // ignore: avoid_function_literals_in_foreach_calls
     objects.values.forEach((object) {
