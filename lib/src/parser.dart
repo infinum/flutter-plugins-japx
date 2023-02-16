@@ -271,6 +271,7 @@ class Japx {
 
   static void _resolveRelationships(
       Map<_TypeIdPair, Map<String, dynamic>?> objects) {
+    Map<_TypeIdPair, Map<String, dynamic>?> objectsAux = {};
     // ignore: avoid_function_literals_in_foreach_calls
     objects.values.forEach((object) {
       if (object == null) {
@@ -286,15 +287,19 @@ class Japx {
 
         final others = _array(relationshipParams, _data);
         if (others == null) {
-          object[key] = null;
           return;
         }
 
         // Fetch those object from `objects`
-        final othersObjects = others
-            .map((e) => _TypeIdPair.fromOrThrow(e))
-            .map((e) => objects[e])
-            .toList();
+        final List<Map<String, dynamic>> othersObjects = [];
+        for (var other in others) {
+          final pair = _TypeIdPair.fromOrThrow(other);
+          if (objects.containsKey(pair)) {
+            othersObjects.add(objects[pair]!);
+          } else {
+            othersObjects.add(other);
+          }
+        }
 
         final isObject = relationshipParams[_data] is List ? false : true;
 
