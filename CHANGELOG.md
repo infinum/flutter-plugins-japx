@@ -1,3 +1,7 @@
+## 2.2.0
+
+- Allow encoding null fields
+
 ## 2.1.0
 
 - Allowing nullable fields to be in response

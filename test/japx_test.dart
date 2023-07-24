@@ -36,7 +36,7 @@ void main() {
           await resultDecoding6()));
   test(
       'Empty relationship decoding',
-          () async => compare(
+      () async => compare(
           Japx.decode(await decodingSample7(),
               includeList: 'author.categories,author.article.author'),
           await resultDecoding7()));
@@ -71,6 +71,10 @@ void main() {
       'List encoding',
       () async => compare(
           Japx.encode(await encodingSample6()), await resultEncoding6()));
+  test(
+      'Nullable encoding',
+      () async => compare(
+          Japx.encode(await encodingSample7()), await resultEncoding7()));
 }
 
 void compare(Map<String, dynamic> sample, Map<String, dynamic> result) =>

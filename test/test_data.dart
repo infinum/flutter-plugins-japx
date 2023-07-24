@@ -42,6 +42,9 @@ Future<Map<String, dynamic>> encodingSample5() async =>
 Future<Map<String, dynamic>> encodingSample6() async =>
     parseJsonFromPath('assets/encoding/encoding-6.json');
 
+Future<Map<String, dynamic>> encodingSample7() async =>
+    parseJsonFromPath('assets/encoding/encoding-7.json');
+
 Future<Map<String, dynamic>> resultDecoding1() async =>
     parseJsonFromPath('assets/result/decoding/result-decoding-1.json');
 
@@ -82,6 +85,9 @@ Future<Map<String, dynamic>> resultEncoding5() async =>
 
 Future<Map<String, dynamic>> resultEncoding6() async =>
     parseJsonFromPath('assets/result/encoding/result-encoding-6.json');
+
+Future<Map<String, dynamic>> resultEncoding7() async =>
+    parseJsonFromPath('assets/result/encoding/result-encoding-7.json');
 
 Future<Map<String, dynamic>> parseJsonFromPath(String assetsPath) async {
   Map<String, dynamic>? json =

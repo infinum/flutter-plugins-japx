@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:collection/collection.dart';
 
 class _TypeIdPair {
@@ -233,10 +234,18 @@ class Japx {
         json.remove(key);
       }
       if (json[key] is Map<String, dynamic>) {
-        final map = json[key] as Map<String, dynamic>?;
+        final map = json[key] as Map<String, dynamic>;
         final typeIdPair = _TypeIdPair.from(map);
         if (typeIdPair == null) {
-          attributes[key] = map;
+          if (map.isNotEmpty) {
+            if (map.containsKey(_data) && map[_data] == null) {
+              relationships[key] = {_data: null};
+              json.remove(key);
+              continue;
+            }
+
+            attributes[key] = map;
+          }
           json.remove(key);
           continue;
         }
@@ -244,13 +253,21 @@ class Japx {
         json.remove(key);
       }
       if (json[key] == null) {
+        if (json.keys.contains(key)) {
+          attributes[key] = null;
+          json.remove(key);
+        }
         continue;
       }
       attributes[key] = json[key];
       json.remove(key);
     }
     json[_attributes] = attributes;
-    json[_relationships] = relationships;
+
+    if (relationships.isNotEmpty) {
+      json[_relationships] = relationships;
+    }
+
     return json;
   }
 
