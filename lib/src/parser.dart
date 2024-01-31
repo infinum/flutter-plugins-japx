@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:collection/collection.dart';
 
 class _TypeIdPair {
@@ -220,37 +221,33 @@ class Japx {
         final array = json[key] as List;
         final isArrayOfRelationships = array.first is Map<String, dynamic> &&
             _TypeIdPair.from(array.first) != null;
-        if (!isArrayOfRelationships) {
-          attributes[key] = array;
+        if (isArrayOfRelationships) {
+          final dataArray = array
+              .map((e) => _TypeIdPair.fromOrThrow(e))
+              .map((e) => e.toMap())
+              .toList();
+          relationships[key] = {_data: dataArray};
           json.remove(key);
           continue;
         }
-        final dataArray = array
-            .map((e) => _TypeIdPair.fromOrThrow(e))
-            .map((e) => e.toMap())
-            .toList();
-        relationships[key] = {_data: dataArray};
-        json.remove(key);
       }
       if (json[key] is Map<String, dynamic>) {
-        final map = json[key] as Map<String, dynamic>?;
+        final map = json[key] as Map<String, dynamic>;
         final typeIdPair = _TypeIdPair.from(map);
-        if (typeIdPair == null) {
-          attributes[key] = map;
+        if (typeIdPair != null) {
+          relationships[key] = {_data: typeIdPair.toMap()};
           json.remove(key);
           continue;
         }
-        relationships[key] = {_data: typeIdPair.toMap()};
-        json.remove(key);
-      }
-      if (json[key] == null) {
-        continue;
       }
       attributes[key] = json[key];
       json.remove(key);
     }
     json[_attributes] = attributes;
-    json[_relationships] = relationships;
+
+    if (relationships.isNotEmpty) {
+      json[_relationships] = relationships;
+    }
     return json;
   }
 
