@@ -1,3 +1,7 @@
+## 2.2.0
+
+- Support for Dart 3
+
 ## 2.1.0
 
 - Allowing nullable fields to be in response
